@@ -9,8 +9,9 @@
     "element",
     "x-tag"
   ],
-  "scripts": [
-    "src/slidebox.js"
+  "main": [
+    "src/slidebox.js",
+    "src/slidebox.css"
   ],
   "dependencies": {
     "x-tag-core": "*"
