@@ -53,8 +53,16 @@
 </body>
 
 <script type="text/javascript">
+  document.getElementById('slidebox_demo').addEventListener('slideend', function(e){
+    console.log("slideend event fired", e.target, this);
+  });
 
-  
+  document.getElementById('slidebox_demo').addEventListener('fooo', function(e){
+    console.log("foo");
+  });
+
+  xtag.fireEvent(document.getElementById('slidebox_demo'), 'fooo');
+
   document.addEventListener('click', function(e){
     
     var action = e.target,
