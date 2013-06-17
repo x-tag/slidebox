@@ -48,6 +48,19 @@
         if (e.target == this.firstElementChild){
           xtag.fireEvent(this, 'slideend');
         }
+      },
+      'show:delegate(x-slide)': function(e){
+        var slide = e.target;
+        console.log(slide.parentNode.nodeName);
+        if(slide.parentNode.nodeName.toLowerCase() === "x-slides" &&
+           slide.parentNode.parentNode.nodeName.toLowerCase() === "x-slidebox")
+        {
+            var slideWrap = slide.parentNode;
+            var box = slideWrap.parentNode;
+            var slides = xtag.query(slideWrap, 'x-slide');
+            
+            box.slideTo(slides.indexOf(slide));
+        }
       }
     },
     accessors:{
