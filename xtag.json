@@ -3,7 +3,7 @@
   "tagName": "x-slidebox",
   "version": "0.2.0",
   "author": "Arron Schaar, Daniel Buchner",
-  "description": "A container that allows animated transitions between content panes. Slide Box supports horizontal and vertical transitions.",
+  "description": "A container that allows animated transitions between content panes, displaying all slides along the way. Think of the component as a filmstrip of slides that moves around in a viewport.",
   "images": [],
   "categories": [
     "structural"
@@ -19,15 +19,15 @@
   "demo": "demo/index.html",
   "documentation": {
     "attributes": {
-      "orientation": "Slide axis.  'x' or 'y'"
+      "orientation": "Slide axis. Set as 'x' for horizontal animations, and set as 'y' for vertical animations."
     },
     "setters": {
-      "orientation": "Sets the slide axis."
+      "orientation": "Sets the slide axis as either 'x' or 'y'."
     },
     "methods": {
       "slideTo": "Slides to a specific element index.",
-      "slideNext": "Slides to next element.",
-      "slidePrevious": "Slides to the previous element."
+      "slideNext": "Slides to the next slide element.",
+      "slidePrevious": "Slides to the previous slide element."
     },
     "events": {
       "slideend": "Fires at the end of each slide transition."
