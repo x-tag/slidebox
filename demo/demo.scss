@@ -1,0 +1,36 @@
+$desat: 50%;
+
+x-slide{
+    font-size: 3em;
+    line-height: 3em;
+    color: white;
+    text-align: center;
+}
+
+x-slide:nth-child(7n+1){
+    background-color: desaturate(red, $desat);
+}
+
+x-slide:nth-child(7n+2){
+    background-color: desaturate(orange, $desat);
+}
+
+x-slide:nth-child(7n+3){
+    background-color: desaturate(yellow, $desat);
+}
+
+x-slide:nth-child(7n+4){
+    background-color: desaturate(green, $desat);
+}
+
+x-slide:nth-child(7n+5){
+    background-color: desaturate(blue, $desat);
+}
+
+x-slide:nth-child(7n+6){
+    background-color: desaturate(indigo, $desat);
+}
+
+x-slide:nth-child(7n){
+    background-color: desaturate(purple, $desat);
+}

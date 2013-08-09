@@ -1,6 +1,8 @@
 x-slidebox {
   display: block;
   overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 x-slides {
@@ -25,4 +27,7 @@ x-slides > x-slide {
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
+  vertical-align: top;
+
+  overflow: hidden;
 }

@@ -10,7 +10,8 @@
   function slide(el, index){
     var slides = xtag.toArray(el.firstElementChild.children);
     slides.forEach(function(slide){ slide.removeAttribute('selected'); });
-    slides[index || 0].setAttribute('selected', null);
+
+    slides[index || 0].setAttribute('selected', true);
     el.firstElementChild.style[transform] = 'translate'+ (el.getAttribute('orientation') || 'x') + '(' + (index || 0) * (-100 / slides.length) + '%)';
   }
 
@@ -69,8 +70,12 @@
           return this.getAttribute('orientation');
         },
         set: function(value){
-          this.setAttribute('orientation', value.toLowerCase());
-          init.call(this, true);
+          var slidebox = this;
+          // prevent filmstrip animation when setting orientation
+          xtag.skipTransition(slidebox.firstElementChild, function(){
+              slidebox.setAttribute('orientation', value.toLowerCase());
+              init.call(slidebox, true);
+          });
         }
       }
     },
