@@ -52,7 +52,6 @@
       },
       'show:delegate(x-slide)': function(e){
         var slide = e.target;
-        console.log(slide.parentNode.nodeName);
         if(slide.parentNode.nodeName.toLowerCase() === "x-slides" &&
            slide.parentNode.parentNode.nodeName.toLowerCase() === "x-slidebox")
         {
