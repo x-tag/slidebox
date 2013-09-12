@@ -16,7 +16,7 @@
     "android": 2.1,
     "ios": 4
   },
-  "demo": "demo/index.html",
+  "demo": "demo/testpage.html",
   "documentation": {
     "attributes": {
       "orientation": "Slide axis. Set as 'x' for horizontal animations, and set as 'y' for vertical animations."
