@@ -4,7 +4,6 @@ x-slidebox {
   height: 100%;
   width: 100%;
 }
-
 x-slides {
   display: block;
   position: relative;
@@ -17,17 +16,15 @@ x-slides {
   -moz-transition: -moz-transform 0.5s ease 0s;
   -webkit-transition: -webkit-transform 0.5s ease 0s;
 }
-
 x-slides > x-slide {
   display: block;
   float: left;
   height: 100%;
-  width: 100%;  
+  width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   vertical-align: top;
-
   overflow: hidden;
 }
