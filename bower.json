@@ -1,5 +1,5 @@
 {
-  "name": "x-slidebox",
+  "name": "x-tag-slidebox",
   "description": "Slides panels of content",
   "version": "0.2.0",
   "keywords": [
@@ -14,6 +14,7 @@
     "src/slidebox.css"
   ],
   "dependencies": {
-    "x-tag-core": "*"
+    "x-tag-core": "*",
+    "brick-common": "*"
   }
 }
