@@ -1,7 +1,7 @@
 {
   "name": "Slidebox",
   "tagName": "x-slidebox",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "author": "Arron Schaar, Daniel Buchner",
   "description": "A container that allows animated transitions between content panes, displaying all slides along the way. Think of the component as a filmstrip of slides that moves around in a viewport.",
   "images": [],
