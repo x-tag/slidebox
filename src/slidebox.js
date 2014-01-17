@@ -61,14 +61,12 @@
           xtag.fireEvent(this, 'slideend');
         }
       },
-      'show:delegate(x-slide)': function (e) {
+      'reveal:delegate(x-slidebox > x-slides > x-slide)': function(e){
         var slide = e.target;
-        if (slide.parentNode.nodeName.toLowerCase() === "x-slides" &&
-            slide.parentNode.parentNode.nodeName.toLowerCase() === "x-slidebox") {
+        if (e.target.parentNode.parentNode == e.currentTarget){
           var slideWrap = slide.parentNode;
           var box = slideWrap.parentNode;
           var slides = xtag.query(slideWrap, 'x-slide');
-
           box.slideTo(slides.indexOf(slide));
         }
       }
