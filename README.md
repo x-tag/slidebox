@@ -41,7 +41,7 @@ Slidebox allows you to create slides of any content and then transition between 
 ```slideend``` is fired at the end of each transition.
 
 ```
-  document.getElementsByNames('x-slidebox')[0].addEventListener('slideend', function(e){
+  document.getElementsByTagName('x-slidebox')[0].addEventListener('slideend', function(e){
     
   });
 
@@ -50,7 +50,7 @@ Slidebox allows you to create slides of any content and then transition between 
 ## Usage
 
 ```
-  var slidebox = document.getElementsByName('x-slidebox')[0];
+  var slidebox = document.getElementsByTagName('x-slidebox')[0];
   slidebox.slideNext();
   slidebox.slidePrevious();
   slidebox.slideTo(1); // index of desired x-slide
