@@ -1,9 +1,9 @@
 {
   "name": "x-slidebox",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "dependencies": {},
   "devDependencies": {
-    "bower": "~1.2.0",
+    "bower": "~1.3.0",
     "grunt": "~0.4.0",
     "grunt-smush-components": "~0.2.0",
     "grunt-contrib-concat": "~0.1.2",
