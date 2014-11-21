@@ -11,9 +11,17 @@
     var slides = xtag.toArray(el.firstElementChild.children);
     slides.forEach(function (slide) {
       slide.removeAttribute('selected');
+      slide.removeAttribute('selected-prev');
+      slide.removeAttribute('selected-next');
     });
 
     slides[index || 0].setAttribute('selected', true);
+    if (index>0){
+      slides[index-1].setAttribute('selected-prev', true);
+    }
+    if (index < slides.length-1){
+      slides[index+1].setAttribute('selected-next', true);
+    }
     var translate = 'translate'+ (el.getAttribute('orientation') || 'x') + '(' + (index || 0) * (-100 / slides.length) + '%)';
     el.firstElementChild.style[transform] = translate;
     el.firstElementChild.style.transform = translate;
@@ -42,7 +50,7 @@
     });
 
     if (toSelected) {
-      var selected = slides.querySelector('[selected]');
+      var selected = slides.querySelector('[selected]') || slides.firstElementChild;
       if (selected) {
         slide(this, children.indexOf(selected) || 0);
       }
@@ -52,7 +60,7 @@
   xtag.register('x-slidebox', {
     lifecycle: {
       created: function () {
-        init();
+        init.call(this, true);
       }
     },
     events: {
