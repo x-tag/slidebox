@@ -1,18 +1,14 @@
 {
   "name": "x-tag-slidebox",
   "description": "Slides panels of content",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "keywords": [
     "web-components",
-    "slidebox",
-    "structural",
-    "element",
     "x-tag"
   ],
   "main": [
-    "src/slidebox.js",
-    "src/slidebox.css",
-    "src/slidebox.styl"
+    "src/main.js",
+    "src/main.css"
   ],
   "dependencies": {
     "x-tag-core": "*"

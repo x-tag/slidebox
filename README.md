@@ -27,12 +27,10 @@ Slidebox allows you to create slides of any content and then transition between 
 
 ```
 <x-slidebox>
-  <x-slides>
-    <x-slide><img src="demo/birnimal-calendar.png" /></x-slide>
-    <x-slide><img src="demo/birnimal-graph.png" /></x-slide>
-    <x-slide><img src="demo/birnimal-detail.png" /></x-slide>
-    <x-slide><img src="demo/birnimal-settings.png" /></x-slide>
-  </x-slides>
+  <section><img src="demo/birnimal-calendar.png" /></section>
+  <section><img src="demo/birnimal-graph.png" /></section>
+  <section><img src="demo/birnimal-detail.png" /></section>
+  <section><img src="demo/birnimal-settings.png" /></section>
 </x-slidebox>
 ```
 
@@ -42,7 +40,7 @@ Slidebox allows you to create slides of any content and then transition between 
 
 ```
   document.getElementsByTagName('x-slidebox')[0].addEventListener('slideend', function(e){
-    
+
   });
 
 ```
@@ -51,12 +49,8 @@ Slidebox allows you to create slides of any content and then transition between 
 
 ```
   var slidebox = document.getElementsByTagName('x-slidebox')[0];
-  slidebox.slideNext();
-  slidebox.slidePrevious();
+  slidebox.nextSlide();
+  slidebox.previousSlide();
   slidebox.slideTo(1); // index of desired x-slide
-  
-  slidebox.orientation = 'y';  // slide veritically 
 
 ```
-
-
