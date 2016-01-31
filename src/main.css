@@ -11,6 +11,7 @@ x-slidebox {
 x-slidebox > section {
   float: left;
   position: relative;
+  height: 100%;
   min-width: 100%;
   margin: 0 -100% 0 0;
   padding: 0;
