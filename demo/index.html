@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Stub Demo - X-Slidebox</title>
+
+  <link rel="stylesheet" type="text/css" href="x-tag-components.css"/>
+  <link rel="stylesheet" type="text/css" href="../src/main.css"/>
+
+  <script type="text/javascript" src="x-tag-components.js"></script>
+  <script type="text/javascript" src="../src/main.js"></script>
+
+  <style>
+
+    section {
+      min-height: 300px;
+      background: yellow;
+    }
+
+    section:nth-of-type(2) {
+      background: green;
+    }
+
+    section:nth-of-type(3) {
+      background: orange;
+    }
+
+    section:nth-of-type(4) {
+      background: blue;
+    }
+
+  </style>
+</head>
+
+<body>
+
+	<x-slidebox nav loop counter>
+    <section caption="This is yellow">Fee 1 2 3 4 5 6 7 8 9</section>
+    <section caption="This is green" selected>Fie</section>
+    <section>Foe</section>
+    <section>Fum</section>
+  </x-slidebox>
+
+  <x-slidebox nav loop counter>
+    <section caption="This is yellow">Fee 1 2 3 4 5 6 7 8 9</section>
+    <section caption="This is green">Fie</section>
+    <section>Foe</section>
+    <section selected>Fum</section>
+  </x-slidebox>
+
+
+</body>
+
+<script>
+document.addEventListener('slideselected', console.log.bind(console));
+</script>
+
+</html>
