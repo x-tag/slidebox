@@ -64,6 +64,7 @@ x-slidebox > section[caption]:before {
   background: rgba(255, 255, 255, 0.75);
   box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.4);
   counter-increment: x-slidebox;
+  z-index: 2;
 }
 
 x-slidebox[counter] > section:before {
@@ -95,6 +96,7 @@ x-slidebox[loop] > section:nth-last-child(2):after {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   cursor: pointer;
+  z-index: 2;
   -webkit-transition: opacity 0.3s ease;
   -ms-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
@@ -134,7 +136,7 @@ x-slidebox[loop] > section:nth-last-child(2):hover:after {
 }
 
 x-slidebox[loop] > section:nth-last-child(2):not([selected]) {
-  z-index: 1;
+  z-index: 2;
 }
 
 x-slidebox > section[selected]:after {
