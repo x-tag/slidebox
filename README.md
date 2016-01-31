@@ -40,7 +40,7 @@ Slidebox allows you to create slides of any content and then transition between 
 
 ```
   document.getElementsByTagName('x-slidebox')[0].addEventListener('slideselected', function(e){
-
+    // e.detail.lastSlide <-- access the last selected slide
   });
 
 ```
