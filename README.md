@@ -36,10 +36,10 @@ Slidebox allows you to create slides of any content and then transition between 
 
 
 ## Events
-```slideend``` is fired at the end of each transition.
+```slideselected``` is fired when a new slide is selected, before it is visually shown.
 
 ```
-  document.getElementsByTagName('x-slidebox')[0].addEventListener('slideend', function(e){
+  document.getElementsByTagName('x-slidebox')[0].addEventListener('slideselected', function(e){
 
   });
 
@@ -51,6 +51,6 @@ Slidebox allows you to create slides of any content and then transition between 
   var slidebox = document.getElementsByTagName('x-slidebox')[0];
   slidebox.slideNext();
   slidebox.slidePrevious();
-  slidebox.slideTo(1); // index of desired x-slide
+  slidebox.slideTo(2); // index of desired x-slide
 
 ```
