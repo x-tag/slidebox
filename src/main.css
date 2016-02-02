@@ -58,38 +58,34 @@ x-slidebox > x-slide[selected] ~ x-slide {
   transform: translateX(100%);
 }
 
-x-slidebox[group]:before {
-  content: attr(group);
-  position: absolute;
-  top: 0.25em;
-  left: 50%;
-  font-size: 2em;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
-  z-index: 3;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-}
-
+x-slidebox[group]:before,
 x-slidebox[counter]:after,
 x-slidebox > x-slide[caption]:before {
   position: absolute;
-  bottom: 1em;
-  padding: 0.4em 0.5em;
+  padding: 0.2em 0.5em;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.75);
-  box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.4);
+  color: #000;
+  background: rgba(255,255,255,0.5);
   z-index: 3;
 }
 
+x-slidebox[group]:before {
+  content: attr(group);
+  top: 0.75em;
+  left: 0.75em;
+  font-weight: bold;
+}
+
 x-slidebox[counter]:after {
-  right: 1em;
+  top: 0.75em;
+  right: 0.75em;
   content: attr(slide-number) "/" attr(slide-count);
 }
 
 x-slidebox > x-slide[caption]:before {
-  left: 1em;
+  left: 0.75em;
+  bottom: 0.75em;
+  max-width: calc(100% - 1.5em);
   content: attr(caption);
 }
 
