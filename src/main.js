@@ -32,6 +32,9 @@
             slidebox.slideNext();
           }
         }
+      },
+      'contextmenu:delegate(x-slidebox > x-slide:not([selected]))': function(e){
+        e.preventDefault();
       }
     },
     accessors: {

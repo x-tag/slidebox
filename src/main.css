@@ -62,10 +62,10 @@ x-slidebox[group]:before,
 x-slidebox[counter]:after,
 x-slidebox > x-slide[caption]:before {
   position: absolute;
-  padding: 0.2em 0.5em;
+  padding: 0.2em 0.4em;
   border-radius: 3px;
   color: #000;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.65);
   z-index: 3;
 }
 
@@ -128,12 +128,6 @@ x-slidebox[loop] > x-slide:nth-last-child(2):after {
   background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iLTE0IDE5NiA1ODIgNDAyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IC0xNCAxOTYgNTgyIDQwMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KCTxwYXRoIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIxNiIgc3Ryb2tlLW1pdGVybGltaXQ9IjE2IiBkPSJNMzgxLjEsMjcyLjFjLTkuNSw5LjMtMTAyLjUsMTA3LTEwMi41LDEwN2MtNS4xLDUtNy42LDExLjUtNy42LDE4czIuNSwxMyw3LjYsMTgNCgkJYzAsMCw5Myw5Ny43LDEwMi41LDEwNi45YzkuNSw5LjMsMjYuNiw5LjksMzYuOCwwYzEwLjEtOS45LDEwLjktMjMuNywwLTM1LjlsLTg1LjMtODlsODUuMy04OWMxMS0xMi4yLDEwLjItMjYsMC0zNS45DQoJCUM0MDcuOCwyNjIuMiwzOTAuNiwyNjIuOCwzODEuMSwyNzIuMUwzODEuMSwyNzIuMXoiLz4NCgk8cGF0aCBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMjAiIHN0cm9rZS1taXRlcmxpbWl0PSIyMCIgZD0iTTIzNC4zLDI0NC43QzIyMi43LDI1NiwxMDkuMywzNzUuMSwxMDkuMywzNzUuMWMtNi4yLDYuMS05LjMsMTQtOS4zLDIxLjljMCw3LjksMy4xLDE1LjgsOS4zLDIxLjkNCgkJYzAsMCwxMTMuNCwxMTkuMSwxMjUuMSwxMzAuNGMxMS42LDExLjMsMzIuNSwxMi4xLDQ0LjksMGMxMi40LTEyLjEsMTMuMy0yOC45LDAtNDMuOEwxNzUuMSwzOTdsMTA0LjEtMTA4LjYNCgkJYzEzLjQtMTQuOCwxMi40LTMxLjcsMC00My44QzI2Ni44LDIzMi42LDI0NS45LDIzMy4zLDIzNC4zLDI0NC43TDIzNC4zLDI0NC43eiIvPg0KPC9zdmc+DQo=);
 }
 
-x-slidebox > x-slide:first-child:hover:after,
-x-slidebox > x-slide:last-child:hover:after,
-x-slidebox[loop] > x-slide:nth-last-child(2):hover:after {
-  opacity: 1;
-}
-
 x-slidebox[loop] > x-slide:nth-last-child(2):not([selected]) {
   z-index: 2;
 }
@@ -145,4 +139,22 @@ x-slidebox > x-slide[selected]:after {
 
 x-slidebox[nav] > x-slide:after, x-slidebox[nav] > x-slide:nth-last-child(2):after {
   display: block;
+}
+
+@media (orientation: portrait) and (max-device-width: 1024px),
+       (orientation: landscape) and (max-device-height: 1024px) {
+  x-slidebox > x-slide:first-child:active:after,
+  x-slidebox > x-slide:last-child:active:after,
+  x-slidebox[loop] > x-slide:nth-last-child(2):active:after {
+    opacity: 1;
+  }
+}
+
+@media (orientation: portrait) and (min-device-width: 1025px),
+       (orientation: landscape) and (min-device-height: 1025px) {
+  x-slidebox > x-slide:first-child:hover:after,
+  x-slidebox > x-slide:last-child:hover:after,
+  x-slidebox[loop] > x-slide:nth-last-child(2):hover:after {
+    opacity: 1;
+  }
 }
