@@ -1,12 +1,28 @@
 (function(){
 
-  function fireSelected(selected, last){
-    xtag.fireEvent(selected, 'slideselected', { detail: { lastSlide: last } });
+  function setSelected(node, selected, last){
+    var last = node.xtag.selected;
+    var select = selected != last;
+    if (select){
+      if (last) last.removeAttribute('selected');
+      node.xtag.selected = selected;
+      selected.selected = true;
+      selected.hasAttribute('group') ? node.setAttribute('group', selected.getAttribute('group')) : node.removeAttribute('group');
+    }
+    updateIndex(node, selected);
+    if (select) xtag.fireEvent(selected, 'slideselected', { detail: { lastSlide: last } });
+  }
+
+  function updateIndex(node, selected){
+    selected = selected || node.querySelector('x-slidebox > [selected]');
+    node.selectedIndex = node.xtag.index = Array.prototype.indexOf.call(node.children, selected);
+    node.setAttribute('slide-count', node.children.length);
+    node.setAttribute('slide-number', node.xtag.index + 1);
   }
 
   xtag.register('x-slidebox', {
     events: {
-      'tap:delegate(x-slidebox > section)': function(e){
+      'tap:delegate(x-slidebox > x-slide)': function(e){
         var slidebox = e.currentTarget;
         if (!this.hasAttribute('selected')) {
           if (this == slidebox.firstElementChild) {
@@ -23,50 +39,66 @@
         attribute: {
           boolean: true
         }
+      },
+      selectedIndex: {
+        attribute: {
+          validate: function(val){
+            return Number(val) || 0
+          }
+        },
+        set: function(val){
+          if (val != this.xtag.index) this.slideTo(val);
+          this.xtag.index = val;
+
+        },
+        get: function(){
+          return this.xtag.index;
+        }
       }
     },
     methods: {
       slideNext: function(){
-        var selected = this.querySelector('x-slidebox > [selected]');
-        if (selected) {
-          var next = selected.nextElementSibling;
-          if (next) {
-            selected.removeAttribute('selected');
-            next.setAttribute('selected', '');
-            fireSelected(next, selected);
-          }
-          else {
-            selected.removeAttribute('selected');
-            this.firstElementChild.setAttribute('selected', '');
-            fireSelected(this.firstElementChild, selected);
-          }
-        }
+        var selected = this.xtag.selected;
+        setSelected(this, (selected && selected.nextElementSibling) || this.firstElementChild, selected);
       },
       slidePrevious: function(){
-        var selected = this.querySelector('x-slidebox > [selected]');
-        if (selected) {
-          var previous = selected.previousElementSibling;
-          if (previous) {
-            selected.removeAttribute('selected');
-            previous.setAttribute('selected', '');
-            fireSelected(previous, selected);
-          }
-        }
+        var selected = this.xtag.selected;
+        setSelected(this, (selected && selected.previousElementSibling) || this.lastElementChild, selected);
       },
       slideTo: function(val){
-        var selected = this.querySelector('x-slidebox > [selected]');
         if (typeof val == 'number') {
           var slide = this.children[val];
-          if (slide && slide != selected) {
-            if (selected) selected.removeAttribute('selected');
-            slide.setAttribute('selected', '');
-            fireSelected(slide, selected);
-          }
+          if (slide && slide != this.xtag.selected) setSelected(this, slide);
         }
-        else if (val && val != selected) {
-          if (selected) selected.removeAttribute('selected');
-          val.setAttribute('selected', '');
-          fireSelected(val, selected);
+        else if (val && val != this.xtag.selected) {
+          setSelected(this, val);
+        }
+      }
+    }
+  });
+
+  function selectSlide(slide){
+    var parent = slide.parentNode;
+    if (parent && parent.nodeName == 'X-SLIDEBOX' && parent.xtag.selected != slide) {
+      parent.slideTo(slide);
+    }
+  }
+
+  xtag.register('x-slide', {
+    lifecycle: {
+      inserted: function(){
+        if (this.selected) selectSlide(this);
+        else {
+          var parent = this.parentNode;
+          if (parent && parent.nodeName == 'X-SLIDEBOX') updateIndex(parent);
+        }
+      }
+    },
+    accessors: {
+      selected: {
+        attribute: { boolean: true },
+        set: function(val){
+          if (val) selectSlide(this);
         }
       }
     }

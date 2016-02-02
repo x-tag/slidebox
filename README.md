@@ -27,10 +27,10 @@ Slidebox allows you to create slides of any content and then transition between 
 
 ```
 <x-slidebox>
-  <section><img src="demo/birnimal-calendar.png" /></section>
-  <section><img src="demo/birnimal-graph.png" /></section>
-  <section><img src="demo/birnimal-detail.png" /></section>
-  <section><img src="demo/birnimal-settings.png" /></section>
+  <x-slide><img src="demo/birnimal-calendar.png" /></x-slide>
+  <x-slide><img src="demo/birnimal-graph.png" /></x-slide>
+  <x-slide><img src="demo/birnimal-detail.png" /></x-slide>
+  <x-slide><img src="demo/birnimal-settings.png" /></x-slide>
 </x-slidebox>
 ```
 
