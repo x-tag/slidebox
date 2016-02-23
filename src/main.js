@@ -6,7 +6,7 @@
     if (select){
       if (last) last.removeAttribute('selected');
       node.xtag.selected = selected;
-      selected.selected = true;
+      selected.setAttribute('selected', '');
       selected.hasAttribute('group') ? node.setAttribute('group', selected.getAttribute('group')) : node.removeAttribute('group');
     }
     updateIndex(node, selected);
