@@ -11,6 +11,7 @@ x-slidebox-slides {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  height: 100%;
 }
 
   x-slidebox-slides[x-slidebox-animate] {
