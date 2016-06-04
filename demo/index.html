@@ -5,7 +5,9 @@
   <meta charset="utf-8" />
   <title>Stub Demo - X-Slidebox</title>
 
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width, height=device-height" />
 
   <link rel="stylesheet" type="text/css" href="x-tag-components.css"/>
   <link rel="stylesheet" type="text/css" href="../src/main.css"/>
@@ -37,19 +39,21 @@
 
 <body>
 
-	<x-slidebox id="demo1" nav loop counter>
+	<x-slidebox id="demo1" nav counter>
     <x-slide group="colors" caption="This is yellow">Fee 1 2 3 4 5 6 7 8 9</x-slide>
-    <x-slide group="colors" caption="This is green" selected>Fie</x-slide>
+    <x-slide group="colors" caption="This is green">Fie</x-slide>
     <x-slide>Foe</x-slide>
     <x-slide>Fum</x-slide>
   </x-slidebox>
 
-  <x-slidebox id="demo2" nav loop counter>
+  <x-slidebox id="demo2" nav counter arrows>
     <x-slide caption="This is yellow">Fee 1 2 3 4 5 6 7 8 9</x-slide>
     <x-slide caption="This is green">Fie</x-slide>
     <x-slide>Foe</x-slide>
     <x-slide selected>Fum</x-slide>
   </x-slidebox>
+
+  <x-slidebox id="demo3" nav counter></x-slidebox>
 
 
 </body>
