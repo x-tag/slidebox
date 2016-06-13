@@ -1,69 +1,93 @@
 (function(){
 
+  var arrowMap = { back: 'slideBack', forward: 'slideForward' };
+
   function setContainerOffset(node, percent, animate) {
     var container = node.xtag.container;
     animate ? container.setAttribute('x-slidebox-animate', '') : container.removeAttribute('x-slidebox-animate');
     container.style.transform = container.style[xtag.prefix.dom + 'Transform'] = 'translate('+ percent +'%, 0%)';
   }
 
-  function setSelected(node, index){
-    var slides = node.slides;
-    var count = node.xtag.count = slides.length;
-    var selected = node.xtag.selected = slides[index];
+  function setSelected(box, index){
+    var slides = box.slides;
+    var count = slides.length;
+    var last = box.xtag.selected;
+    var selected = box.xtag.selected = slides[index];
     slides.forEach(function(slide){
       slide.removeAttribute('selected');
     });
     selected.setAttribute('selected', '');
-    node.setAttribute('slide-count', node.xtag.count = count);
-    node.setAttribute('slide-number', index + 1);
-    if (index == 0) node.setAttribute('slide-position', 'start');
-    else if (index == count - 1) node.setAttribute('slide-position', 'end');
-    else node.removeAttribute('slide-position');
-    xtag.fireEvent(selected, 'slideselected');
+    box.setAttribute('slide-number', index + 1);
+    setSlideCount(box, count);
+    if (index == 0) box.setAttribute('slide-position', 'start');
+    else if (index == count - 1) box.setAttribute('slide-position', 'end');
+    else box.removeAttribute('slide-position');
+    xtag.fireEvent(selected, 'selected', { detail: { lastSlide: last } });
   }
 
   xtag.register('x-slidebox', {
+    content: function(){/*
+      <x-slidebox-arrow arrow-direction="back"></x-slidebox-arrow>
+      <x-slidebox-arrow arrow-direction="forward"></x-slidebox-arrow>
+    */},
     lifecycle: {
       created: function(){
-        this.setAttribute('touch-action', 'none');
         this.xtag.center = { x: 0, y: 0 };
-        this.xtag.container = this.appendChild(document.createElement('x-slidebox-slides'));
-        this.xtag.arrowback = this.appendChild(document.createElement('x-slidebox-arrowback'));
-        this.xtag.arrowforward = this.appendChild(document.createElement('x-slidebox-arrowforward'));
+        this.setAttribute('touch-action', 'none');
+        var selected;
+        var container = this.xtag.container = document.createElement('x-slidebox-slides');
+        xtag.toArray(this.children).forEach(function(slide){
+          if (slide.nodeName == 'X-SLIDE') {
+            container.appendChild(slide);
+            if (slide.hasAttribute('selected')) selected = slide;
+          }
+        });
+        var count = container.children.length;
+        setSlideCount(this, count);
+        this.appendChild(container);
+        if (!selected && count) this.slideTo(0);
       }
     },
     events: {
-      tap: function(e){
-        if (e.target == this.xtag.arrowback) this.slideBack(true);
-        else if (e.target == this.xtag.arrowforward) this.slideForward(true);
+      'tap:delegate(x-slidebox-arrow)': function(event){
+        var box = event.currentTarget;
+        if (this.parentNode == box){
+          box.xtag.arrowtap = true;
+          box[arrowMap[this.getAttribute('arrow-direction')]](true);
+        }
       },
       tapmove: function(event){
+        var data = this.xtag;
         if (event.type == 'pointerdown') {
-          this.xtag.center.x = event.clientX;
-          this.xtag.center.y = event.clientY;
+          data.center.x = event.clientX;
+          data.center.y = event.clientY;
+          if (document.selection) document.selection.empty();
+          else window.getSelection().removeAllRanges();
         }
-        else if (event.type == 'pointerup' || event.type == 'pointercancel') {
-          if (Math.abs(this.xtag.delta) > ((this.xtag.container.scrollWidth / this.xtag.count) / 3)) {
-            if (this.xtag.delta > 0) this.slideBack(true);
-            else this.slideForward(true);
-          }
-          else this.slideTo(this.xtag.index, true);
-        }
-        else {
-          var delta = this.xtag.delta = event[this.xtag.axisProp] - this.xtag.center[this.xtag.axis];
-          var count = this.xtag.count;
-          var index = this.xtag.index;
+        else if (event.type == 'pointermove') {
+          var delta = data.delta = event[data.axisProp] - data.center[data.axis];
+          var count = data.count;
+          var index = data.index;
           var direction = delta > 0;
-
-          var offset = (delta / this.xtag.container.scrollWidth) * 100;
+          var offset = (delta / data.container.scrollWidth) * 100;
           if ((index == 0 && direction) || (index == count - 1 && !direction)) {
             offset *= .4;
           }
-
+          if (!data.sliding) data.sliding = this.setAttribute('x-slidebox-sliding', '') ? true : true;
           setContainerOffset(this, -(100 / count) * index + offset);
         }
+        else {
+          if (!data.arrowtap) {
+            if (Math.abs(data.delta) > (Math.min((data.container.scrollWidth / data.count) / 5, 150))) {
+              data.delta > 0 ? this.slideBack(true) : this.slideForward(true);
+            }
+            else this.slideTo(data.index, true);
+          }
+          data.delta = 0;
+          data.sliding = data.arrowtap = this.removeAttribute('x-slidebox-sliding') ? false : false;
+        }
       },
-      'contextmenu:delegate(x-slidebox-slides > x-slide:not([selected]))': function(e){
+      'contextmenu:delegate(x-slidebox-arrow)': function(e){
         e.preventDefault();
       }
     },
@@ -124,26 +148,24 @@
     }
   }
 
+  function setSlideCount(box, count){
+    var count = box.xtag.count = count;
+    box.setAttribute('slide-count', count);
+    box.xtag.container.style.width = count * 100 + '%';
+  }
+
   xtag.register('x-slide', {
     lifecycle: {
       inserted: function(){
         var box = this.parentNode;
         if (box && box.nodeName == 'X-SLIDEBOX') {
-          var container = box.xtag.container;
-          container.appendChild(this);
-          var count = box.xtag.count = container.children.length;
-          box.setAttribute('slide-count', count);
-          container.style.width = count * 100 + '%';
+          box.xtag.container.appendChild(slide);
           if (this.selected || !box.xtag.selected) box.slideTo(this);
         }
       },
       removed: function(parent){
         var box = parent.parentNode;
-        if (box && box.nodeName == 'X-SLIDEBOX') {
-          --box.xtag.count;
-          box.setAttribute('slide-count', box.xtag.count);
-          box.xtag.container.style.width = box.xtag.count * 100 + '%';
-        }
+        if (box && box.nodeName == 'X-SLIDEBOX') setSlideCount(box, box.xtag.count - 1)
       }
     },
     accessors: {
