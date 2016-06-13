@@ -159,7 +159,7 @@
       inserted: function(){
         var box = this.parentNode;
         if (box && box.nodeName == 'X-SLIDEBOX') {
-          box.xtag.container.appendChild(slide);
+          box.xtag.container.appendChild(this);
           if (this.selected || !box.xtag.selected) box.slideTo(this);
         }
       },
