@@ -3976,17 +3976,13 @@ window.CustomElements.addModule(function(scope) {
         * prefix.js: addresses prefixed APIs present in global and non-Element contexts
     */
     prefix = (function () {
-      var styles = win.getComputedStyle(doc.documentElement, ''),
-          pre = (Array.prototype.slice
-            .call(styles)
-            .join('')
-            .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-          )[1];
+      var keys = Object.keys(window).join();
+      var pre = ((keys.match(/,(ms)/) || keys.match(/,(moz)/) || keys.match(/,(O)/)) || [null, 'webkit'])[1].toLowerCase();
       return {
         dom: pre == 'ms' ? 'MS' : pre,
         lowercase: pre,
         css: '-' + pre + '-',
-        js: pre == 'ms' ? pre : pre[0].toUpperCase() + pre.substr(1)
+        js: pre == 'ms' ? pre : pre.charAt(0).toUpperCase() + pre.substring(1)
       };
     })(),
     matchSelector = Element.prototype.matches || Element.prototype.matchesSelector || Element.prototype[prefix.lowercase + 'MatchesSelector'];
@@ -4811,4 +4807,27 @@ window.CustomElements.addModule(function(scope) {
     xtag.fireEvent(doc.body, 'DOMComponentsLoaded');
   });
 
+})();
+
+(function(){
+  var bounce = function(){
+    var args = this.queueArgs;
+    var target = this.queueTarget;
+    this.queueArgs = this.queueTarget = this.queueRequest = null;
+    return this.apply(target, args);
+  };
+
+  xtag.pseudos.debounce = {
+    onCompiled: function(fn, pseudo){
+      var timer = pseudo.arguments[0] == 'timer';
+      var duration = pseudo.arguments[1];
+      return function(){
+        fn.queueArgs = arguments;
+        fn.queueTarget = this;
+        fn.queueRequest = fn.queueRequest || (timer ?
+                          setTimeout(bounce.bind(fn), duration || 100) :
+                          xtag.requestFrame(bounce.bind(fn)));
+      }
+    }
+  }
 })();

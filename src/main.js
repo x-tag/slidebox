@@ -56,7 +56,7 @@
           box[arrowMap[this.getAttribute('arrow-direction')]](true);
         }
       },
-      tapmove: function(event){
+      'tapmove:debounce': function(event){
         var data = this.xtag;
         if (event.type == 'pointerdown') {
           data.center.x = event.clientX;

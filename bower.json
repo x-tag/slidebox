@@ -1,7 +1,7 @@
 {
   "name": "x-tag-slidebox",
   "description": "Slides panels of content",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "keywords": [
     "web-components",
     "x-tag"
@@ -11,6 +11,7 @@
     "src/main.css"
   ],
   "dependencies": {
-    "x-tag-core": "*"
+    "x-tag-core": "*",
+    "x-tag-pseudo-debounce": "*"
   }
 }
