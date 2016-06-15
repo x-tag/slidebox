@@ -96,7 +96,7 @@
         attribute: {
           def: 'x'
         },
-        set: function(val, old){
+        set: function(val){
           this.xtag.axis = val.toLowerCase();
           this.xtag.axisProp = 'client' + val.toUpperCase();
         }
@@ -112,7 +112,7 @@
             return Number(val) || 0
           }
         },
-        set: function(val, old){
+        set: function(val){
           if (this.xtag.index > -1 && val != this.xtag.index) this.slideTo(val);
           this.xtag.index = val;
         },
@@ -125,10 +125,13 @@
       slideTo: function(index, animate) {
         var slides = this.slides;
         var count = slides.length;
-        index = index.nodeName ? slides.indexOf(index) : Number(index);
-        index = this.selectedIndex = this.xtag.index = Math.max(0, Math.min(index, count - 1));
-        setSelected(this, index);
-        setContainerOffset(this, -((100 / count) * index), animate);
+        if (count > 0) {
+          index = index.nodeName ? slides.indexOf(index) : Number(index);
+          index = this.selectedIndex = this.xtag.index = Math.max(0, Math.min(index, count - 1));
+          setSelected(this, index);
+          setContainerOffset(this, -((100 / count) * index), animate);
+        }
+        else this.selectedIndex = -1;
       },
       slideForward: function(animate){
         this.slideTo(this.xtag.index + 1, animate);

@@ -1,6 +1,6 @@
 {
   "name": "x-tag-slidebox",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "dependencies": {},
   "devDependencies": {
     "bower": "~1.2.4",

@@ -59,7 +59,7 @@ x-slidebox[group]:before {
   font-weight: bold;
 }
 
-x-slidebox[counter]:after {
+x-slidebox[counter]:not([slide-count="0"]):after {
   top: 0.75em;
   right: 0.75em;
   content: attr(slide-number) "/" attr(slide-count);
