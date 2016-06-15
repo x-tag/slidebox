@@ -102,6 +102,7 @@ x-slidebox[arrows] > x-slidebox-arrow {
   display: block;
 }
 
+x-slidebox[slide-count="0"] > x-slidebox-arrow,
 x-slidebox[slide-position="start"] > x-slidebox-arrow[arrow-direction="back"],
 x-slidebox[slide-position="end"] > x-slidebox-arrow[arrow-direction="forward"] {
   display: none;
